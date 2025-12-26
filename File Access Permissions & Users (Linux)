@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <sys/stat.h>
+
+int main() {
+    struct stat st;
+
+    if (stat("file.txt", &st) == -1) {
+        perror("Stat error");
+        return 1;
+    }
+
+    printf("File Permissions:\n");
+    printf((st.st_mode & S_IRUSR) ? "Owner Read\n" : "");
+    printf((st.st_mode & S_IWUSR) ? "Owner Write\n" : "");
+    printf((st.st_mode & S_IXUSR) ? "Owner Execute\n" : "");
+
+    printf((st.st_mode & S_IRGRP) ? "Group Read\n" : "");
+    printf((st.st_mode & S_IROTH) ? "Others Read\n" : "");
+
+    return 0;
+}
