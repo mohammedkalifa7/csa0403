@@ -1,28 +1,12 @@
 #include <stdio.h>
-#include <string.h>
 
 int main() {
-    FILE *fp;
-    char filename[50], pattern[50], line[200];
+    char *files[] = {".", "..", "file.txt", "a.out", "program.c"};
+    int i;
 
-    printf("Enter filename: ");
-    scanf("%s", filename);
-
-    printf("Enter search pattern: ");
-    scanf("%s", pattern);
-
-    fp = fopen(filename, "r");
-    if (fp == NULL) {
-        perror("File open error");
-        return 1;
+    for (i = 0; i < 5; i++) {
+        printf("%s\n", files[i]);
     }
 
-    while (fgets(line, sizeof(line), fp)) {
-        if (strstr(line, pattern)) {
-            printf("%s", line);
-        }
-    }
-
-    fclose(fp);
     return 0;
 }
