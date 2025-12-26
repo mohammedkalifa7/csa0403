@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+int main() {
+    int fd;
+    char write_data[] = "UNIX System Calls File Program";
+    char read_data[100];
+
+    fd = open("sample.txt", O_CREAT | O_RDWR, 0644);
+    if (fd == -1) {
+        perror("File open error");
+        return 1;
+    }
+    write(fd, write_data, strlen(write_data));
+    lseek(fd, 0, SEEK_SET);
+    read(fd, read_data, sizeof(read_data));
+    printf("Data read from file: %s\n", read_data);
+    close(fd);
+    return 0;
+}
