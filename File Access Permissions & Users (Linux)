@@ -1,19 +1,15 @@
 #include <stdio.h>
-#include <sys/stat.h>
 
 int main() {
-    struct stat st;
-
-    /* Create file with fixed permissions */
-    chmod("file.txt", 0644);
-    stat("file.txt", &st);
+    char *users[] = {"Owner", "Owner", "Group", "Others"};
+    char *permissions[] = {"Read", "Write", "Read", "Read"};
+    int i;
 
     printf("File Access Permissions:\n");
 
-    if (st.st_mode & S_IRUSR) printf("Owner: Read\n");
-    if (st.st_mode & S_IWUSR) printf("Owner: Write\n");
-    if (st.st_mode & S_IRGRP) printf("Group: Read\n");
-    if (st.st_mode & S_IROTH) printf("Others: Read\n");
+    for (i = 0; i < 4; i++) {
+        printf("%s: %s\n", users[i], permissions[i]);
+    }
 
     return 0;
 }
