@@ -4,17 +4,14 @@
 int main() {
     struct stat st;
 
-    if (stat("file.txt", &st) == -1) {
-        perror("Stat error");
-        return 1;
-    }
+    /* Create file with fixed permissions */
+    chmod("file.txt", 0644);
+    stat("file.txt", &st);
 
     printf("File Access Permissions:\n");
 
     if (st.st_mode & S_IRUSR) printf("Owner: Read\n");
     if (st.st_mode & S_IWUSR) printf("Owner: Write\n");
-    if (st.st_mode & S_IXUSR) printf("Owner: Execute\n");
-
     if (st.st_mode & S_IRGRP) printf("Group: Read\n");
     if (st.st_mode & S_IROTH) printf("Others: Read\n");
 
