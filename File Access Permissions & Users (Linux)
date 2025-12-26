@@ -9,13 +9,15 @@ int main() {
         return 1;
     }
 
-    printf("File Permissions:\n");
-    printf((st.st_mode & S_IRUSR) ? "Owner Read\n" : "");
-    printf((st.st_mode & S_IWUSR) ? "Owner Write\n" : "");
-    printf((st.st_mode & S_IXUSR) ? "Owner Execute\n" : "");
+    printf("File Access Permissions:\n");
 
-    printf((st.st_mode & S_IRGRP) ? "Group Read\n" : "");
-    printf((st.st_mode & S_IROTH) ? "Others Read\n" : "");
+    if (st.st_mode & S_IRUSR) printf("Owner: Read\n");
+    if (st.st_mode & S_IWUSR) printf("Owner: Write\n");
+    if (st.st_mode & S_IXUSR) printf("Owner: Execute\n");
+
+    if (st.st_mode & S_IRGRP) printf("Group: Read\n");
+    if (st.st_mode & S_IROTH) printf("Others: Read\n");
 
     return 0;
 }
+
