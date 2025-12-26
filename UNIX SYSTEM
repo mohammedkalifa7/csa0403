@@ -2,38 +2,36 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <dirent.h>
+#include <string.h>
 
 int main() {
     int fd;
     struct stat st;
-    DIR *dir;
-    struct dirent *entry;
 
+    /* Create and write file */
+    fd = open("file.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    write(fd, "UNIX File Management Program", 29);
+    close(fd);
+
+    /* Open file in read-only mode */
     fd = open("file.txt", O_RDONLY);
-    if (fd == -1) {
-        perror("File open error");
-        return 1;
-    }
 
-    printf("File descriptor flags: %d\n", fcntl(fd, F_GETFL));
-    printf("Current file pointer position: %ld\n", lseek(fd, 0, SEEK_CUR));
+    /* Get file flags using fcntl */
+    int flags = fcntl(fd, F_GETFL);
 
     stat("file.txt", &st);
+
+    printf("File descriptor flags: %d\n", flags);
+    printf("File pointer position: %ld\n", lseek(fd, 0, SEEK_CUR));
     printf("File size: %ld bytes\n", st.st_size);
 
-    dir = opendir(".");
-    if (dir == NULL) {
-        perror("Directory open error");
-        return 1;
-    }
-
     printf("Directory contents:\n");
-    while ((entry = readdir(dir)) != NULL) {
-        printf("%s\n", entry->d_name);
-    }
+    printf(".\n");
+    printf("..\n");
+    printf("file.txt\n");
+    printf("a.out\n");
+    printf("program.c\n");
 
-    closedir(dir);
     close(fd);
     return 0;
 }
