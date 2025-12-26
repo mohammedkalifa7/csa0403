@@ -2,19 +2,20 @@
 #include <dirent.h>
 
 int main() {
-    DIR *dp;
+    DIR *dir;
     struct dirent *entry;
 
-    dp = opendir(".");
-    if (dp == NULL) {
+    dir = opendir(".");
+    if (dir == NULL) {
         perror("Cannot open directory");
         return 1;
     }
 
-    while ((entry = readdir(dp)) != NULL) {
+    while ((entry = readdir(dir)) != NULL) {
         printf("%s\n", entry->d_name);
     }
 
-    closedir(dp);
+    closedir(dir);
     return 0;
 }
+
