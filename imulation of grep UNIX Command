@@ -3,14 +3,17 @@
 
 int main() {
     FILE *fp;
-    char line[200], pattern[50];
+    char filename[50], pattern[50], line[200];
+
+    printf("Enter filename: ");
+    scanf("%s", filename);
 
     printf("Enter search pattern: ");
     scanf("%s", pattern);
 
-    fp = fopen("file.txt", "r");
+    fp = fopen(filename, "r");
     if (fp == NULL) {
-        perror("File not found");
+        perror("File open error");
         return 1;
     }
 
