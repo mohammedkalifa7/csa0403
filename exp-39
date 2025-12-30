@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int head;
+    printf("Enter head position: ");
+    scanf("%d", &head);
+
+    int seek = (199 - head) + 199;
+    printf("Total Seek Time = %d\n", seek);
+
+    return 0;
+}
