@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp;
+    char ch;
+
+    fp = fopen("file.txt", "w");
+    fprintf(fp, "Hello File Management");
+    fclose(fp);
+
+    fp = fopen("file.txt", "a");
+    fprintf(fp, "\nAppending Data");
+    fclose(fp);
+
+    fp = fopen("file.txt", "r");
+    printf("File Content:\n");
+    while ((ch = fgetc(fp)) != EOF)
+        putchar(ch);
+    fclose(fp);
+
+    remove("file.txt");
+    printf("\nFile deleted successfully\n");
+
+    return 0;
+}
